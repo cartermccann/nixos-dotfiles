@@ -6,8 +6,8 @@
 
   programs.git = {
     enable = true;
-    userName = "Carter";
-    userEmail = "your@email.com";
+    userName = "cartermccann";
+    userEmail = "cjmccann00@gmail.com";
   };
 
   programs.neovim = {
@@ -22,7 +22,7 @@
     fd
     fzf
     tree
-    neofetch
+    fastfetch
     nodejs
     python3
   ];

@@ -29,9 +29,10 @@
     autoRepeatDelay = 200;
     autoRepeatInterval = 35;
     windowManager.qtile.enable = true;
-    libinput.enable = true;
     xkb.layout = "us";
   };
+
+  services.libinput.enable = true;
 
   virtualisation.docker.enable = true;
 
