@@ -21,6 +21,16 @@
     source = ./qtile/autostart.sh;
     executable = true;
   };
+  xdg.configFile."qtile/show-keys.sh" = {
+    source = ./qtile/show-keys.sh;
+    executable = true;
+  };
+
+  # Wallpaper
+  home.file."wallpaper.jpg".source = ../wallpaper/nord-landscape.jpg;
+
+  # Rofi config
+  xdg.configFile."rofi/config.rasi".source = ./rofi/config.rasi;
 
   home.stateVersion = "25.11";
 }

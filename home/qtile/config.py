@@ -35,7 +35,8 @@ keys = [
 
     # Window movement
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Shuffle down"),
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Shuffle up"),
+    Key([mod, "shift"], "Up", lazy.layout.shuffle_up(), desc="Shuffle up"),
+    Key([mod, "shift"], "k", lazy.spawn(os.path.expanduser("~/.config/qtile/show-keys.sh")), desc="Show keybindings"),
 
     # Layout toggles
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Fullscreen"),
@@ -44,13 +45,7 @@ keys = [
 
     # Apps
     Key([mod], "Return", lazy.spawn(terminal), desc="Terminal"),
-    Key([mod], "d", lazy.spawn("rofi -show drun -theme-str '"
-        'window { background-color: ' + nord0 + '; } '
-        'element-text { text-color: ' + nord4 + '; } '
-        'element selected.normal { background-color: ' + nord9 + '; } '
-        'inputbar { background-color: ' + nord1 + '; text-color: ' + nord4 + '; } '
-        'listview { background-color: ' + nord0 + '; } '
-        "'" ), desc="Rofi"),
+    Key([mod], "d", lazy.spawn("rofi -show drun -show-icons"), desc="Rofi"),
     Key([mod], "b", lazy.spawn("firefox"), desc="Firefox"),
     Key([mod], "Print", lazy.spawn("flameshot gui"), desc="Screenshot"),
 
@@ -193,6 +188,11 @@ floating_layout = layout.Floating(
 )
 
 # ── Autostart ─────────────────────────────────────────────────
+@hook.subscribe.startup
+def set_wallpaper():
+    wallpaper = os.path.expanduser("~/wallpaper.jpg")
+    subprocess.Popen(["feh", "--no-fehbg", "--bg-scale", wallpaper])
+
 @hook.subscribe.startup_once
 def autostart():
     script = os.path.expanduser("~/.config/qtile/autostart.sh")
