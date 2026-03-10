@@ -43,6 +43,8 @@
     };
     initExtra = ''
       export PATH="$HOME/.local/bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:$PATH"
+      export NODE_COMPILE_CACHE=/var/tmp/openclaw-compile-cache
+      export OPENCLAW_NO_RESPAWN=1
 
       # Install openclaw globally if not present
       if ! command -v openclaw &> /dev/null && command -v npm &> /dev/null; then

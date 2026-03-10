@@ -57,11 +57,14 @@ in
       Wants = [ "network-online.target" ];
     };
     Service = {
-      ExecStart = "${pkgs.nodejs}/bin/node %h/.npm-global/lib/node_modules/openclaw/dist/index.js gateway --port 18789";
+      ExecStart = "${pkgs.nodejs}/bin/node /home/carter/.npm-global/lib/node_modules/openclaw/dist/index.js gateway --port 18789";
       Restart = "always";
       RestartSec = 5;
       KillMode = "process";
       Environment = [
+        "PATH=/home/carter/.npm-global/bin:${pkgs.nodejs}/bin:/run/current-system/sw/bin:/usr/bin:/bin"
+        "NODE_COMPILE_CACHE=/var/tmp/openclaw-compile-cache"
+        "OPENCLAW_NO_RESPAWN=1"
         "OPENCLAW_GATEWAY_PORT=18789"
         "OPENCLAW_SERVICE_MARKER=openclaw"
         "OPENCLAW_SERVICE_KIND=gateway"

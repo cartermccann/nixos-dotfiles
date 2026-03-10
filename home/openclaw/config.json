@@ -11,10 +11,6 @@
   },
   "auth": {
     "profiles": {
-      "anthropic:claude-cli": {
-        "provider": "anthropic",
-        "mode": "oauth"
-      },
       "anthropic:default": {
         "provider": "anthropic",
         "mode": "token"
@@ -77,7 +73,7 @@
       "dmPolicy": "pairing",
       "botToken": "SECRET",
       "groupPolicy": "allowlist",
-      "streamMode": "partial"
+      "streaming": "partial"
     },
     "slack": {
       "mode": "socket",
@@ -92,6 +88,8 @@
       "appToken": "SECRET",
       "userTokenReadOnly": true,
       "allowBots": true,
+      "dmPolicy": "open",
+      "allowFrom": ["*"],
       "groupPolicy": "open",
       "blockStreamingCoalesce": {
         "idleMs": 0
@@ -105,10 +103,6 @@
         "memberInfo": true,
         "channelInfo": true,
         "emojiList": true
-      },
-      "dm": {
-        "policy": "open",
-        "allowFrom": ["*"]
       }
     }
   },
