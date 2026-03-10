@@ -6,6 +6,7 @@
     ./git.nix
     ./neovim.nix
     ./alacritty.nix
+    ./openclaw.nix
   ];
 
   home.username = "carter";
