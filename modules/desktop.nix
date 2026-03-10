@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Display manager + Qtile
+  # Display manager + Qtile (ly offers both X11 and Wayland sessions)
   services.displayManager.ly.enable = true;
   services.xserver = {
     enable = true;
@@ -13,7 +13,7 @@
 
   services.libinput.enable = true;
 
-  # Compositor
+  # Compositor (X11 only — Wayland handles compositing natively)
   services.picom = {
     enable = true;
     settings = {
@@ -36,12 +36,19 @@
   # Desktop packages
   environment.systemPackages = with pkgs; [
     alacritty
-    rofi
-    feh
+    rofi               # supports both X11 and Wayland
     dunst
-    flameshot
     networkmanagerapplet
     pavucontrol
+
+    # X11
+    feh
+    flameshot
     xclip
+
+    # Wayland
+    grim               # screenshot
+    slurp              # region selection
+    wl-clipboard       # clipboard
   ];
 }

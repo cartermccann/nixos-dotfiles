@@ -55,6 +55,7 @@
   programs.starship = {
     enable = true;
     settings = {
+      scan_timeout = 100;
       format = "$directory$git_branch$git_status$python$nodejs$elixir$rust$nix_shell$docker_context$character";
       directory = {
         style = "bold #81A1C1";

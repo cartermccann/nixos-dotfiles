@@ -7,6 +7,9 @@ from libqtile.lazy import lazy
 mod = "mod4"
 terminal = "alacritty"
 
+# ── Backend Detection ────────────────────────────────────────
+is_wayland = os.environ.get("WAYLAND_DISPLAY") is not None
+
 # ── Nord Palette ──────────────────────────────────────────────
 nord0 = "#2E3440"   # Polar Night
 nord1 = "#3B4252"
@@ -26,6 +29,8 @@ nord14 = "#A3BE8C"
 nord15 = "#B48EAD"
 
 # ── Keybindings ───────────────────────────────────────────────
+screenshot_cmd = "grim -g \"$(slurp)\"" if is_wayland else "flameshot gui"
+
 keys = [
     # Window focus
     Key([mod], "j", lazy.layout.down(), desc="Focus down"),
@@ -47,7 +52,7 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Terminal"),
     Key([mod], "d", lazy.spawn("rofi -show drun -show-icons"), desc="Rofi"),
     Key([mod], "b", lazy.spawn("firefox"), desc="Firefox"),
-    Key([mod], "Print", lazy.spawn("flameshot gui"), desc="Screenshot"),
+    Key([mod], "Print", lazy.spawn(screenshot_cmd), desc="Screenshot"),
 
     # Window management
     Key([mod], "q", lazy.window.kill(), desc="Kill window"),
@@ -107,8 +112,19 @@ extension_defaults = widget_defaults.copy()
 def sep():
     return widget.Sep(linewidth=0, padding=8, background=nord0)
 
+# Systray is X11-only; StatusNotifier works on Wayland
+tray_widget = widget.StatusNotifier(padding=4) if is_wayland else widget.Systray(padding=4)
+
+# Wallpaper: built-in Screen wallpaper works on both, feh fallback for X11
+wallpaper_path = os.path.expanduser("~/wallpaper.jpg")
+screen_kwargs = dict(
+    wallpaper=wallpaper_path,
+    wallpaper_mode="fill",
+)
+
 screens = [
     Screen(
+        **screen_kwargs,
         top=bar.Bar(
             [
                 widget.GroupBox(
@@ -156,9 +172,7 @@ screens = [
                     foreground=nord9,
                 ),
                 sep(),
-                widget.Systray(
-                    padding=4,
-                ),
+                tray_widget,
                 widget.Sep(linewidth=0, padding=4),
             ],
             size=28,
@@ -188,11 +202,6 @@ floating_layout = layout.Floating(
 )
 
 # ── Autostart ─────────────────────────────────────────────────
-@hook.subscribe.startup
-def set_wallpaper():
-    wallpaper = os.path.expanduser("~/wallpaper.jpg")
-    subprocess.Popen(["feh", "--no-fehbg", "--bg-scale", wallpaper])
-
 @hook.subscribe.startup_once
 def autostart():
     script = os.path.expanduser("~/.config/qtile/autostart.sh")
