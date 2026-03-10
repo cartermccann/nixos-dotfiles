@@ -67,7 +67,7 @@
     "whatsapp": {
       "dmPolicy": "allowlist",
       "selfChatMode": true,
-      "allowFrom": [],
+      "allowFrom": ["+placeholder"],
       "groupPolicy": "allowlist",
       "mediaMaxMb": 50,
       "debounceMs": 0

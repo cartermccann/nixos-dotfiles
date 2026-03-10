@@ -8,11 +8,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    google-workspace-cli = {
+      url = "github:googleworkspace/cli";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, ... }: {
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, google-workspace-cli, ... }: {
     nixosConfigurations.BeepBeep = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = { inherit google-workspace-cli; };
       modules = [
         ./hosts/beepbeep/configuration.nix
         home-manager.nixosModules.home-manager
@@ -29,6 +34,7 @@
 
     nixosConfigurations.SurfaceDev = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = { inherit google-workspace-cli; };
       modules = [
         ./hosts/surface/configuration.nix
         nixos-hardware.nixosModules.microsoft-surface-common

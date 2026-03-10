@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, google-workspace-cli, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -35,6 +35,9 @@
     # Nix
     nil
     nixfmt-rfc-style
+
+    # Google Workspace CLI
+    google-workspace-cli.packages.x86_64-linux.default
 
     # General dev tools
     ripgrep
