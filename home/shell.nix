@@ -35,6 +35,9 @@
       cat = "bat";
       grep = "rg";
 
+      # Ollama
+      ai = "ollama run llama3.2:3b";
+
       # OpenClaw
       claw = "openclaw";
     };

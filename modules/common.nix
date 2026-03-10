@@ -5,6 +5,12 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Swap — gives headroom for LLMs
+  swapDevices = [{
+    device = "/swapfile";
+    size = 4096; # 4GB
+  }];
+
   # Networking
   networking.networkmanager.enable = true;
 
@@ -29,6 +35,12 @@
 
   # Docker
   virtualisation.docker.enable = true;
+
+  # Ollama — local LLM server
+  services.ollama = {
+    enable = true;
+    acceleration = false; # no GPU, CPU-only
+  };
 
   # User
   users.users.carter = {
