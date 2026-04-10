@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  zen-browser,
   ...
 }:
 
@@ -53,6 +54,7 @@
 
     #apps
     spotify
+    zen-browser.packages.x86_64-linux.default
 
     # Wayland
     grim # screenshot

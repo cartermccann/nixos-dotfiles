@@ -12,12 +12,16 @@
       url = "github:googleworkspace/cli";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, google-workspace-cli, ... }: {
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, google-workspace-cli, zen-browser, ... }: {
     nixosConfigurations.BeepBeep = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit google-workspace-cli; };
+      specialArgs = { inherit google-workspace-cli zen-browser; };
       modules = [
         ./hosts/beepbeep/configuration.nix
         home-manager.nixosModules.home-manager
@@ -34,7 +38,7 @@
 
     nixosConfigurations.SurfaceDev = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit google-workspace-cli; };
+      specialArgs = { inherit google-workspace-cli zen-browser; };
       modules = [
         ./hosts/surface/configuration.nix
         nixos-hardware.nixosModules.microsoft-surface-common
