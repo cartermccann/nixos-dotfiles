@@ -38,6 +38,7 @@
 
     # Google Workspace CLI
     google-workspace-cli.packages.x86_64-linux.default
+    google-cloud-sdk
 
     # General dev tools
     ripgrep

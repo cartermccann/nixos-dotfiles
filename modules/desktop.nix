@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   # Display manager + Qtile (ly offers both X11 and Wayland sessions)
@@ -36,7 +41,7 @@
   # Desktop packages
   environment.systemPackages = with pkgs; [
     alacritty
-    rofi               # supports both X11 and Wayland
+    rofi # supports both X11 and Wayland
     dunst
     networkmanagerapplet
     pavucontrol
@@ -46,9 +51,12 @@
     flameshot
     xclip
 
+    #apps
+    spotify
+
     # Wayland
-    grim               # screenshot
-    slurp              # region selection
-    wl-clipboard       # clipboard
+    grim # screenshot
+    slurp # region selection
+    wl-clipboard # clipboard
   ];
 }
